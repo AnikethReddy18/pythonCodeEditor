@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QGridLayout, QWidget, QTextEdit, QMainWindow, QPushButton \
-    , QFileDialog
+    , QFileDialog, QInputDialog
 
 
 class MainWindow(QMainWindow):
@@ -18,18 +18,26 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Python Code Editor")
 
         # Buttons
+        new_file_button = QPushButton("New")
+        layout.addWidget(new_file_button, 0, 0)
+        new_file_button.pressed.connect(self.new_file)
+
         open_file_button = QPushButton("Open")
-        layout.addWidget(open_file_button, 0, 0)
+        layout.addWidget(open_file_button, 0, 1)
         open_file_button.pressed.connect(self.open_file)
 
         save_file_button = QPushButton("Save")
-        layout.addWidget(save_file_button, 0, 1)
+        layout.addWidget(save_file_button, 0, 2)
         save_file_button.pressed.connect(self.save_file)
+
+        run_file_button = QPushButton("Run")
+        layout.addWidget(run_file_button, 0, 3)
+        run_file_button.pressed.connect(self.run_file)
 
         # Text Edit
         self.text_edit = QTextEdit()
         self.text_edit.setPlaceholderText("Code goes here")
-        layout.addWidget(self.text_edit, 1, 0, 1 , 2)
+        layout.addWidget(self.text_edit, 1, 0, 1, 4)
 
         self.showMaximized()
 
@@ -47,4 +55,16 @@ class MainWindow(QMainWindow):
         with open(self.file_path, "w") as file:
             file.write(content)
 
+    def run_file(self):
+        pass
 
+    def new_file(self):
+        input_dialogue = QInputDialog()
+        input_dialogue.setWindowTitle("New File")
+        input_dialogue.setLabelText("Enter address of the new file")
+        input_dialogue.exec()
+        path = input_dialogue.textValue()
+
+        with open(path, "w") as file:
+            file.write("")
+            self.file_path = path
