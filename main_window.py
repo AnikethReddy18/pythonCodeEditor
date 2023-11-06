@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QGridLayout, QWidget, QTextEdit, QMainWindow, QPushButton \
     , QFileDialog, QInputDialog
 
+import os
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -56,7 +57,7 @@ class MainWindow(QMainWindow):
             file.write(content)
 
     def run_file(self):
-        pass
+        os.system(f"start cmd /K python {self.file_path}")
 
     def new_file(self):
         input_dialogue = QInputDialog()
