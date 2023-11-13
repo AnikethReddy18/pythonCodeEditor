@@ -1,7 +1,11 @@
+
 from PyQt6.QtWidgets import QGridLayout, QWidget, QTextEdit, QMainWindow, QPushButton \
     , QFileDialog, QInputDialog
 
 import os
+from syntax_highlighter import MySyntaxHighlighter
+
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -40,6 +44,13 @@ class MainWindow(QMainWindow):
         self.text_edit.setPlaceholderText("Code goes here")
         layout.addWidget(self.text_edit, 1, 0, 1, 4)
 
+        # Syntax Highlighter
+        self.highlighter = MySyntaxHighlighter()
+        self.highlighter.setDocument(self.text_edit.document())
+
+        # Style
+        self.setStyleSheet("color: black")
+
         self.showMaximized()
 
     def open_file(self):
@@ -69,3 +80,5 @@ class MainWindow(QMainWindow):
         with open(path, "w") as file:
             file.write("")
             self.file_path = path
+
+
