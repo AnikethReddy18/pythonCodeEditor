@@ -22,10 +22,15 @@ class CodeEditor(QTextEdit):
         if event.key() == Qt.Key.Key_Return:
             cursor = self.textCursor()
             line_text = cursor.block().text().strip()
-
             self.insertPlainText("\n")
-            if line_text[-1] == ":":
-                self.insertPlainText("     ")
+
+            try:
+                if line_text[-1] == ":":
+                    self.insertPlainText("     ")
+            except:
+                pass
+
+
 
         elif event.key() == Qt.Key.Key_ParenLeft:
             self.insertPlainText("()")
