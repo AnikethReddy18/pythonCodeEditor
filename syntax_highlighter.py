@@ -1,12 +1,17 @@
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QSyntaxHighlighter
+
+from PyQt6.QtGui import QSyntaxHighlighter, QColor
 import re
 
 
 class MySyntaxHighlighter(QSyntaxHighlighter):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.mapping = {"class": Qt.GlobalColor.blue}
+        self.mapping = {
+            r"\b(if|else|elif|while|for|def|class|import|from|as|True|False|None)\b": QColor("#ff7700"),
+            r"\".*?\"|\'.*?\'": QColor("#00ff66"),
+            r'""".*?"""|\'\'\'.*?\'\'\'': QColor("#00ff66"),
+            r"#.*": QColor("#96a89d")
+        }
 
     def highlightBlock(self, text):
         for pattern, frmt in self.mapping.items():
@@ -14,5 +19,4 @@ class MySyntaxHighlighter(QSyntaxHighlighter):
                 start, end = match.span()
                 self.setFormat(start, end - start, frmt)
 
-# highlighter = MySyntaxHighlighter()
-# highlighter.setDocument(text_input.document())
+

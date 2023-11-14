@@ -1,10 +1,8 @@
-
 from PyQt6.QtWidgets import QGridLayout, QWidget, QTextEdit, QMainWindow, QPushButton \
     , QFileDialog, QInputDialog
 
 import os
-from syntax_highlighter import MySyntaxHighlighter
-
+from code_editor import CodeEditor
 
 
 class MainWindow(QMainWindow):
@@ -40,16 +38,28 @@ class MainWindow(QMainWindow):
         run_file_button.pressed.connect(self.run_file)
 
         # Text Edit
-        self.text_edit = QTextEdit()
+        self.text_edit = CodeEditor()
         self.text_edit.setPlaceholderText("Code goes here")
         layout.addWidget(self.text_edit, 1, 0, 1, 4)
 
-        # Syntax Highlighter
-        self.highlighter = MySyntaxHighlighter()
-        self.highlighter.setDocument(self.text_edit.document())
-
         # Style
-        self.setStyleSheet("color: black")
+        dark_stylesheet = """
+                    QMainWindow {
+                        background-color: #2E2E2E; 
+                        color: #F0F0F0;  
+                    }
+
+                    QPushButton {
+                        background-color: #2E2E2E;  
+                        color: #F0F0F0; 
+                        border: 2px solid #505050;
+                    }
+                    QPushButton:hover {
+                         background-color: #404040;
+                    }
+                    
+                """
+        self.setStyleSheet(dark_stylesheet)
 
         self.showMaximized()
 
@@ -80,5 +90,3 @@ class MainWindow(QMainWindow):
         with open(path, "w") as file:
             file.write("")
             self.file_path = path
-
-
