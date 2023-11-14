@@ -27,5 +27,7 @@ class CodeEditor(QTextEdit):
             if line_text[-1] == ":":
                 self.insertPlainText("     ")
 
+        elif event.key() == Qt.Key.Key_ParenLeft:
+            self.insertPlainText("()")
         else:
             super().keyPressEvent(event)
