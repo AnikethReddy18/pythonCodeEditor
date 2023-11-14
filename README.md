@@ -1,3 +1,3 @@
 TODO:
 
-Make the run button functional
+Improve error handline and imorove those buttons

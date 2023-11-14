@@ -21,9 +21,12 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Python Code Editor")
 
         # Buttons
+        open_file_button = QPushButton("Open")
+        layout.addWidget(open_file_button, 0, 0)
+        open_file_button.pressed.connect(self.open_file)
 
         save_file_button = QPushButton("Save")
-        layout.addWidget(save_file_button, 0, 0, 1, 2)
+        layout.addWidget(save_file_button, 0, 1)
         save_file_button.pressed.connect(self.save_file)
 
         run_file_button = QPushButton("Run")
@@ -56,6 +59,20 @@ class MainWindow(QMainWindow):
 
         self.showMaximized()
 
+    def open_file(self):
+        try:
+            file_dialog = QFileDialog()
+            file_dialog.exec()
+            self.file_path = file_dialog.selectedFiles()[0]
+
+            with open(self.file_path, "r") as py_file:
+                content = py_file.read()
+                self.text_edit.setText(content)
+
+        except:
+            pass
+
+
     def save_file(self):
 
         content = self.text_edit.toPlainText()
@@ -73,3 +90,5 @@ class MainWindow(QMainWindow):
 
     def run_file(self):
         os.system(f"start cmd /K python {self.file_path}")
+
+
