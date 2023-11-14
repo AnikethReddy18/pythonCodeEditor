@@ -60,18 +60,15 @@ class MainWindow(QMainWindow):
         self.showMaximized()
 
     def open_file(self):
-        try:
-            file_dialog = QFileDialog()
-            file_dialog.exec()
-            self.file_path = file_dialog.selectedFiles()[0]
 
+        file_dialog = QFileDialog()
+        result = file_dialog.exec()
+
+        if result:
+            self.file_path = file_dialog.selectedFiles()[0]
             with open(self.file_path, "r") as py_file:
                 content = py_file.read()
                 self.text_edit.setText(content)
-
-        except:
-            pass
-
 
     def save_file(self):
 
@@ -90,5 +87,3 @@ class MainWindow(QMainWindow):
 
     def run_file(self):
         os.system(f"start cmd /K python {self.file_path}")
-
-
