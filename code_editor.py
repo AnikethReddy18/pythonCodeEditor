@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QTextEdit
 from syntax_highlighter import MySyntaxHighlighter
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QTextCursor
 
 
 class CodeEditor(QTextEdit):
@@ -29,9 +30,8 @@ class CodeEditor(QTextEdit):
             except:
                 pass
 
-
-
         elif event.key() == Qt.Key.Key_ParenLeft:
             self.insertPlainText("()")
+
         else:
             super().keyPressEvent(event)
