@@ -10,7 +10,7 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         # Variables
-        self.file_path = ""
+        self.file_path = None
 
         # Layout and Window
         layout = QGridLayout()
@@ -21,20 +21,13 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Python Code Editor")
 
         # Buttons
-        new_file_button = QPushButton("New")
-        layout.addWidget(new_file_button, 0, 0)
-        new_file_button.pressed.connect(self.new_file)
-
-        open_file_button = QPushButton("Open")
-        layout.addWidget(open_file_button, 0, 1)
-        open_file_button.pressed.connect(self.open_file)
 
         save_file_button = QPushButton("Save")
-        layout.addWidget(save_file_button, 0, 2)
+        layout.addWidget(save_file_button, 0, 0, 1, 2)
         save_file_button.pressed.connect(self.save_file)
 
         run_file_button = QPushButton("Run")
-        layout.addWidget(run_file_button, 0, 3)
+        layout.addWidget(run_file_button, 0, 2, 1, 2)
         run_file_button.pressed.connect(self.run_file)
 
         # Text Edit
@@ -63,30 +56,20 @@ class MainWindow(QMainWindow):
 
         self.showMaximized()
 
-    def open_file(self):
-        file_dialog = QFileDialog()
-        file_dialog.exec()
-        self.file_path = file_dialog.selectedFiles()[0]
-
-        with open(self.file_path, "r") as py_file:
-            content = py_file.read()
-            self.text_edit.setText(content)
-
     def save_file(self):
+
         content = self.text_edit.toPlainText()
-        with open(self.file_path, "w") as file:
-            file.write(content)
+
+        if self.file_path is not None:
+            with open(self.file_path, "w") as file:
+                file.write(content)
+        else:
+            file_dialog = QFileDialog()
+            file_dialog.exec()
+            self.file_path = file_dialog.selectedFiles()[0]
+
+            with open(self.file_path, "w") as py_file:
+                py_file.write(content)
 
     def run_file(self):
         os.system(f"start cmd /K python {self.file_path}")
-
-    def new_file(self):
-        input_dialogue = QInputDialog()
-        input_dialogue.setWindowTitle("New File")
-        input_dialogue.setLabelText("Enter address of the new file")
-        input_dialogue.exec()
-        path = input_dialogue.textValue()
-
-        with open(path, "w") as file:
-            file.write("")
-            self.file_path = path

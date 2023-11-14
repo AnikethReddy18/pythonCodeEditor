@@ -1,4 +1,3 @@
-from PyQt6.QtGui import QTextCursor
 from PyQt6.QtWidgets import QTextEdit
 from syntax_highlighter import MySyntaxHighlighter
 from PyQt6.QtCore import Qt
@@ -11,7 +10,7 @@ class CodeEditor(QTextEdit):
                         background-color: #1E1E1E;
                         color: #F0F0F0;
                         border: 2px solid #505050;
-                        font-size: 15px
+                        font-size: 20px;
                     }""")
 
         # Syntax Highlighter
