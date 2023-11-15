@@ -79,11 +79,17 @@ class MainWindow(QMainWindow):
                 file.write(content)
         else:
             file_dialog = QFileDialog()
+            file_dialog.setWindowTitle("Save File")
+            file_dialog.setDefaultSuffix(".py")
             file_dialog.exec()
-            self.file_path = file_dialog.selectedFiles()[0]
 
-            with open(self.file_path, "w") as py_file:
-                py_file.write(content)
+            if self.file_path is not None:
+                self.file_path = file_dialog.selectedFiles()[0]
+                with open(self.file_path, "w") as py_file:
+                    py_file.write(content)
 
     def run_file(self):
-        os.system(f"start cmd /K python {self.file_path}")
+        if self.file_path is not None:
+            os.system(f"start cmd /K python {self.file_path}")
+        else:
+            self.save_file()
