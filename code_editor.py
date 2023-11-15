@@ -1,7 +1,6 @@
 from PyQt6.QtWidgets import QTextEdit
 from syntax_highlighter import MySyntaxHighlighter
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QTextCursor
 
 
 class CodeEditor(QTextEdit):
@@ -32,6 +31,11 @@ class CodeEditor(QTextEdit):
 
         elif event.key() == Qt.Key.Key_ParenLeft:
             self.insertPlainText("()")
+            self.moveCursor(self.textCursor().MoveOperation.Left)
+
+        elif event.key() == Qt.Key.Key_QuoteDbl:
+            self.insertPlainText("\"\"")
+            self.moveCursor(self.textCursor().MoveOperation.Left)
 
         else:
             super().keyPressEvent(event)
