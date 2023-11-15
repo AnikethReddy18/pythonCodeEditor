@@ -12,7 +12,7 @@ class CodeEditor(QTextEdit):
                         background-color: #1E1E1E;
                         color: #F0F0F0;
                         border: 2px solid #505050;
-                        font-family: Arial;
+                        font-family: Roboto;
                         font-size: 20px;
                     }""")
 
@@ -37,6 +37,10 @@ class CodeEditor(QTextEdit):
 
         elif event.key() == Qt.Key.Key_QuoteDbl:
             self.insertPlainText("\"\"")
+            self.move_cursor_left()
+
+        elif event.key() == Qt.Key.Key_Apostrophe:
+            self.insertPlainText("\'\'")
             self.move_cursor_left()
 
         else:

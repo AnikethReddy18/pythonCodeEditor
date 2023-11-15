@@ -1,4 +1,3 @@
-
 from PyQt6.QtGui import QSyntaxHighlighter, QColor
 import re
 
@@ -10,6 +9,7 @@ class MySyntaxHighlighter(QSyntaxHighlighter):
             r"\b(if|else|elif|while|for|def|class|import|from|as|True|False|None)\b": QColor("#ff7700"),
             r"\".*?\"|\'.*?\'": QColor("#00ff66"),
             r'""".*?"""|\'\'\'.*?\'\'\'': QColor("#00ff66"),
+            r"\\.": QColor("#ff7700"),
             r"#.*": QColor("#96a89d")
         }
 

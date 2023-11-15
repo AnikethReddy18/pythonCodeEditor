@@ -38,7 +38,6 @@ class MainWindow(QMainWindow):
         self.text_edit = CodeEditor()
         self.text_edit.setPlaceholderText("Code goes here")
         layout.addWidget(self.text_edit, 1, 0, 1, 4)
-
         # Style
         dark_stylesheet = """
                     QMainWindow {
