@@ -28,10 +28,8 @@ class CodeEditor(QTextEdit):
             try:
                 if line_text[-1] == ":":
                     self.insertPlainText("     ")
-                    self.to_indent = True
-            except:
+            except IndexError:
                 pass
-
 
         elif event.key() == Qt.Key.Key_ParenLeft:
             self.insertPlainText("()")
