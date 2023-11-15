@@ -1,5 +1,6 @@
+
 from PyQt6.QtWidgets import QGridLayout, QWidget, QTextEdit, QMainWindow, QPushButton \
-    , QFileDialog, QInputDialog
+    , QFileDialog
 
 import os
 from code_editor import CodeEditor
@@ -41,8 +42,7 @@ class MainWindow(QMainWindow):
         # Style
         dark_stylesheet = """
                     QMainWindow {
-                        background-color: #2E2E2E; 
-                        color: #F0F0F0;  
+                        background-color: #2E2E2E;   
                     }
 
                     QPushButton {
